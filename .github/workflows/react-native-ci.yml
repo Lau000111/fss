@@ -32,7 +32,6 @@ jobs:
         token: ${{ secrets.APPFLOW_TOKEN }}
         platform: Android
         build-type: debug
-        environment: MyEnvironment
         upload-artifact: Android-Build.zip
 
   trigger_appflow_ios:
@@ -46,6 +45,4 @@ jobs:
         token: ${{ secrets.APPFLOW_TOKEN }}
         platform: iOS
         build-type: ad-hoc
-        certificate: MyCertificate
-        environment: MyEnvironment
         upload-artifact: iOS-Build.zip
