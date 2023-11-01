@@ -30,7 +30,7 @@ jobs:
       with:
         app-id: ${{ secrets.APPFLOW_APP_ID }}
         token: ${{ secrets.APPFLOW_TOKEN }}
-        platform: 'android'
+        platform: 'Android'
         type: 'build'
 
   trigger_appflow_ios:
@@ -42,5 +42,5 @@ jobs:
       with:
         app-id: ${{ secrets.APPFLOW_APP_ID }}
         token: ${{ secrets.APPFLOW_TOKEN }}
-        platform: 'ios'
+        platform: 'iOS'
         type: 'build'
