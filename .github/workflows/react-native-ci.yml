@@ -1,4 +1,4 @@
-name: React Native CI
+name: React native build
 
 on:
   push:
@@ -6,8 +6,7 @@ on:
       - main
 
 jobs:
-  install_and_build:
-    name: Install and Build
+  install:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Repository
@@ -16,20 +15,32 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v1
       with:
-        node-version: '14'
+        node-version: '20'
 
     - name: Install Dependencies
       run: npm install
       working-directory: frontend-native
 
-    - name: Build Expo Web
-      run: npm run web
-      working-directory: frontend-native
+  trigger_appflow_android:
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+    - name: Trigger Appflow Build for Android
+      uses: ionic-team/appflow-action@v1
+      with:
+        app-id: ${{ secrets.APPFLOW_APP_ID }}
+        token: ${{ secrets.APPFLOW_TOKEN }}
+        platform: 'android'
+        type: 'build'
 
-    - name: Build Expo Android
-      run: npm run android
-      working-directory: frontend-native
-
-    - name: Build Expo iOS
-      run: npm run ios
-      working-directory: frontend-native
+  trigger_appflow_ios:
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+    - name: Trigger Appflow Build for iOS
+      uses: ionic-team/appflow-action@v1
+      with:
+        app-id: ${{ secrets.APPFLOW_APP_ID }}
+        token: ${{ secrets.APPFLOW_TOKEN }}
+        platform: 'ios'
+        type: 'build'
