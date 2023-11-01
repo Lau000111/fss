@@ -1,4 +1,4 @@
-name: React native build
+name: React native build and deploy
 
 on:
   push:
