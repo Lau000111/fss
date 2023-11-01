@@ -31,7 +31,7 @@ jobs:
         app-id: ${{ secrets.APPFLOW_APP_ID }}
         token: ${{ secrets.APPFLOW_TOKEN }}
         platform: 'Android'
-        type: 'build'
+        type: 'debug'
 
   trigger_appflow_ios:
     needs: install
@@ -43,4 +43,4 @@ jobs:
         app-id: ${{ secrets.APPFLOW_APP_ID }}
         token: ${{ secrets.APPFLOW_TOKEN }}
         platform: 'iOS'
-        type: 'build'
+        type: 'debug'
