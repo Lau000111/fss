@@ -44,5 +44,5 @@ jobs:
         app-id: ${{ secrets.APPFLOW_APP_ID }}
         token: ${{ secrets.APPFLOW_TOKEN }}
         platform: iOS
-        build-type: debug
+        build-type: development
         upload-artifact: iOS-Build.zip
