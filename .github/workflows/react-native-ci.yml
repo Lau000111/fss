@@ -3,7 +3,7 @@ name: React native build and deploy
 on:
   push:
     branches:
-      - main
+      - tryout
 
 jobs:
   install:
