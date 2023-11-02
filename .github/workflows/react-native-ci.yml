@@ -19,7 +19,6 @@ jobs:
 
     - name: Install Dependencies
       run: npm install
-      working-directory: frontend-native
 
   trigger_appflow_android:
     needs: install
