@@ -25,8 +25,5 @@ jobs:
       - name: 📦 Install dependencies
         run: npm install
 
-      - name: ⚙️ Configure EAS
-        run: eas init --non-interactive || true
-
       - name: 🚀 Build app
-        run: eas build --auto
+        run: expo build:android
