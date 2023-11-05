@@ -30,7 +30,7 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-        # The working directory is already set to frontend-native by the defaults above
+        working-directory: frontend-native
 
       - name: Build on EAS
         run: eas build --platform all --non-interactive
