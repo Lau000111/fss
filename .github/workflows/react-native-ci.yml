@@ -1,48 +1,28 @@
-name: React native build and deploy
-
 on:
   push:
     branches:
-      - main
-
+      - expo
 jobs:
-  install:
+  build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: '20'
+      - name: 🏗 Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          cache: 'npm'
 
-    - name: Install Dependencies
-      run: npm install
-      working-directory: frontend-native
+      - name: 🏗 Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
 
-  trigger_appflow_android:
-    needs: install
-    runs-on: ubuntu-latest
-    steps:
-    - name: Trigger Appflow Build for Android
-      uses: ionic-team/appflow-build@v1
-      with:
-        app-id: ${{ secrets.APPFLOW_APP_ID }}
-        token: ${{ secrets.APPFLOW_TOKEN }}
-        platform: Android
-        build-type: debug
-        upload-artifact: Android-Build.zip
+      - name: 📦 Install dependencies
+        run: npm install
 
-  trigger_appflow_ios:
-    needs: install
-    runs-on: ubuntu-latest
-    steps:
-    - name: Trigger Appflow Build for iOS
-      uses: ionic-team/appflow-build@v1
-      with:
-        app-id: ${{ secrets.APPFLOW_APP_ID }}
-        token: ${{ secrets.APPFLOW_TOKEN }}
-        platform: iOS
-        build-type: development
-        upload-artifact: iOS-Build.zip
+      - name: 🚀 Build app
+        run: eas build --platform all --non-interactive
